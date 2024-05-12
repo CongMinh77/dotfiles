@@ -1,0 +1,134 @@
+{
+  :profiles {
+    :goku {
+      :default true
+      :alone   80 ; hold for .. ms to register single tap
+      :sim     30 ; keys need to be pressed within this threshold to be considered simultaneous
+      :delay   0 ; time after which the key press is delayed
+      :held    50
+    }
+  }
+  :templates {
+    :alfred "osascript -e 'tell application \"Alfred 4\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
+    :km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
+    :open "open \"%s\""
+  }
+
+  :simlayers {
+    :caps_lock-mode {:key :caps_lock}
+    :w-mode {:key :w}
+    :3-mode {:key :3}
+    :s-mode {:key :s}
+    :r-mode {:key :r}
+    :o-mode {:key :o}
+    :v-mode {:key :v}
+  }
+
+  :main [
+    {
+      :des "capskey",
+      :rules [:caps_lock-mode
+             [:open_bracket :!TOopen_bracket]
+             [:close_bracket :!TOclose_bracket]
+             [:semicolon :!TOsemicolon]
+             [:quote :!TOquote]
+             [:comma :!TOcomma]
+             [:period :!TOperiod]
+             [:slash :!TOslash]
+             [:a "'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile 'Default'"]
+             [:b :!TOb]
+             [:c [:alfred "search cheats" "com.wayneyao.cheat"]]
+             [:d :!TOd]
+             [:e [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
+             [:f :!TOf]
+             [:g :!TOg]
+             [:h :!TOh]
+             [:i :!TOi]
+             [:j :!TOj]
+             [:k :!TOk]
+             [:l :!TOl]
+             [:m :!TOm]
+             [:n :!TOn]
+             [:o :!TOo]
+             [:p [:km "Chrome: Pause or Play Youtube Videos"]]
+             [:q :!TOq]
+             [:r :!TOr]
+             [:s :!TOs]
+             [:t [:alfred "search tabs" "com.clintonstrong.SearchTabs"]]
+             [:u :!TOu]
+             [:w :!TOw]
+             [:v :!TOv]
+             [:x :!TOx]
+             [:y :!TOy]
+             [:z :!TOz]
+             [:1 :!TO1]
+             [:2 :!TO2]
+             [:3 :!TO3]
+             [:4 :!TO4]
+             [:5 :!TO5]
+             [:6 :!TO6]
+             [:7 :!TO7]
+             [:8 :!TO8]
+             [:9 :!TO9]
+             [:0 :!TO0]
+      ]
+    }
+    {
+      :des "wkey (window open)",
+      :rules [:w-mode
+             [:c [:km "open: Chrome"]]
+             [:i [:km "open: iTerm"]]
+             [:j [:km "open: Slack"]]
+             [:o [:km "open: Obsidian"]]
+             [:s [:km "open: Spotify"]]
+             [:m [:km "open: Messenger"]]
+             [:n [:km "open: Notion"]]
+             [:e [:km "open: Evernote"]]
+             [:k [:km "open: Calendar"]]
+             [:t [:km "open: Todoist"]]
+             [:l [:km "open: VLC"]]
+             [:z [:km "open: Zalo"]]
+      ]
+    }
+    {
+      :des "3key (open files + projects)"
+      :rules [:3-mode
+             [:d [:km "edit: dotfiles"]]
+             [:z [:km "edit: zshrc"]]
+             [:v [:km "edit: vimrc"]]
+             [:k [:km "edit: Karabiner"]]
+      ]
+    }
+    {
+      :des "reload app"
+      :rules [:r-mode
+             [:k [:km "reload: goku"]]
+      ]
+    }
+    {
+      :des "skey (Spotify)"
+      :rules [:s-mode
+             [:comma [:alfred "show_search_online" "com.vdesabou.spotify.mini.player"]]
+             [:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
+             [:p [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
+             [:h [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
+             [:l [:alfred "next" "com.vdesabou.spotify.mini.player"]]
+             [:f [:alfred "song_radio" "com.vdesabou.spotify.mini.player"]]
+      ]
+    }
+    {
+      :des "okey (alfred)"
+      :rules [:o-mode
+             [:d [:alfred "dow" "com.sztoltz.recentitems"]]
+             [:k [:alfred "kill_process" "com.ngreenstein.alfred-process-killer"]]
+      ]
+    }
+    {
+      :des "vkey"
+      :rules [:v-mode
+             [:u [:km "volume: up"]]
+             [:d [:km "volume: down"]]
+      ]
+    }
+  ]
+}

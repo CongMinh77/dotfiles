@@ -1,0 +1,119 @@
+"3.9 (created: 2015/02/15 15:49:05)
+
+" ==================== General config =======================
+
+set autocomplete
+set titlestring="Mozilla Firefox"
+set messages=100
+set verbose=1
+set history=1000
+set newtab=all
+set popups=tab
+
+"\\ Search
+set nohlsearch
+set ignorecase
+set incsearch
+set smartcase
+
+set wildmode=list:longest,full
+set editor="urxvt -e vim -f"
+set hintinputs="label,name"
+abbreviate fmk foolmaker
+abbreviate vimp vimperator
+set complete=l
+
+" ==================== Mappings =======================
+
+"\\ Enable map <Space>
+js <<EOM
+  window.addEventListener('keypress',function (event) {
+    var code=event.charCode;
+    if ((liberator.mode === modes.INSERT && modes.extended === modes.MENU)
+    ||(liberator.mode ==modes.NORMAL && code==32)
+    ||(liberator.mode ==modes.COMMAND_LINE && code !=32)){
+      let map = mappings.get(liberator.mode, events.toString(event));
+      if (map) {
+        event.preventDefault();
+        event.stopPropagation();
+        map.execute();
+      }
+    }
+  },false);
+EOM
+
+" Leader key
+map <Space> <Leader>
+
+"\\ Source config file
+"noremap <silent> <Leader>s :source ~/.vimperatorrc<CR>;:echo<Space>"source completed."<CR>
+
+"\\ Quickly switch tab
+nmap <Leader>1 1b
+nmap <Leader>2 2b
+nmap <Leader>3 3b
+nmap <Leader>4 4b
+nmap <Leader>5 5b
+nmap <Leader>6 6b
+nmap <Leader>7 7b
+nmap <Leader>8 8b
+nmap <Leader>9 9b
+nmap gl g$
+nmap gf 2b
+
+"\\ Ctrl A to select all
+inoremap <C-a> <C-Home><C-S-End>
+
+"\\ Open private window
+nnoremap <Leader>pw i<c-s-p>
+
+" ==================== Behaviors =======================
+
+"\\ Quickly scroll
+" nmap J <C-d>
+" nmap K <C-u>
+
+"\\ Textarea mode
+imap <C-h> <C-t>
+
+"\\ Pin/ unpin tab
+map <Leader>pt :set apptab=true<CR>
+map <Leader>up :set apptab=false<CR>
+
+"\\ Move tabs
+nnoremap <Leader>h :tabmove! -1<CR>
+nnoremap <Leader>l :tabmove! +1<CR>
+
+"\\ Qmarks. Press `go<mark>` to open page on current tab or `gn<mark>` to open in new tab
+silent qmark f http://facebook.com
+silent qmark t http://twitter.com/home/
+silent qmark y https://youtube.com
+silent qmark i https://www.instagram.com/
+silent qmark e https://www.evernote.com/Home.action
+silent qmark g https://github.com/
+silent qmark m https://mail.google.com/mail/
+silent qmark l http://localhost:3000/
+silent qmark c https://chatwork.com
+
+" ==================== Apperance =======================
+
+highlight Hint font: 13px "Lucida Console", monospace !important; border: 1px solid rgba(0, 0, 0, 1); background: rgba(255, 248, 231, 1); color: black;
+set focuscontent
+set hintchars=asdfghjklqwertyuiopzxcvbnm
+set scrollbars
+set gui=addons,bookmarks,menu,navigation,tabs
+highlight Hint -append z-index:2999999999
+
+
+
+" ==================== Extend functions =======================
+
+"\\ Setting for YoutubePlayer.js
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" l :ytseek<Space>+
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" h :ytseek<Space>-
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" s :ytseek<Space>
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" mu :ytmute<Return>
+nmap -urls="https?:\\/\\/(www.)?youtube.com\\/.*|https?:\\/\\/(www.)?erogetrailers.com\\/.*" p :ytplay<Return>
+
+" Copy ..
+nmap Y :js<Space>util.copyToClipboard(content.document.title,true)<Return>

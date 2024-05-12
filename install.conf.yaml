@@ -1,0 +1,68 @@
+# Settings
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true # Swap original file
+
+# TODO: Clean dead symlinks
+- clean: ["~", "~/.config"]
+
+# Run shell commands
+- shell:
+    # Install submodules
+    - [git submodule update --init --recursive, Installing submodules]
+
+# Symlink files
+- link:
+    # Zsh
+    ~/.zshrc: zsh/zshrc
+    ~/.zshenv: zsh/zshenv
+    # Git
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore: git/gitignore
+    ~/.gitconfig_sun: git/gitconfig_sun
+    ~/.gitattributes: git/gitattributes
+    # Git template
+    ~/.git_template: git_template
+    # Vim
+    ~/.vimrc: vim/vimrc
+    ~/.ackrc: vim/ackrc
+    # Tmux
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux/plugins/tmux-safekill/scripts/safekill.sh:
+      force: true
+      path: tmux/safekill.sh
+    # Tmuxinator
+    ~/.tmuxinator/project.yml:
+      create: true
+      path: tmuxinator/project.yml
+    ~/.tmuxinator/flask.yml:
+      create: true
+      path: tmuxinator/flask.yml
+    # Ruby & Rails
+    ~/.gemrc: rails/gemrc
+    ~/.irbrc: rails/irbrc
+    ~/.pryrc: rails/pryrc
+    ~/.railsrc: rails/railsrc
+    # Ctag
+    ~/.ctags: ctags/ctags
+    # Python
+    ~/.config/pudb/pudb.cfg:
+      force: true
+      path: python/pudb/pudb.cfg
+    # Karabiner
+    ~/.config/karabiner.edn:
+      force: true
+      path: karabiner/karabiner.edn
+    ~/.config/karabiner/karabiner.json:
+      force: true
+      path: karabiner/karabiner.json
+    # MTMR
+    ~/Library/Application Support/MTMR/items.json:
+      force: true
+      path: mtmr/items.json
+    # Neovim
+    ~/.config/nvim:
+      force: true
+      path: nvim
